@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { map } from 'lodash';
-import logo from './logo.svg';
-import './App.css';
-import Note from './Note.js';
+import './Detail.css';
+import Note from '../Note';
 
-class App extends Component {
+class Detail extends Component {
   onComponentMount() {
     this.state = {}
   }
@@ -20,19 +19,17 @@ class App extends Component {
       notes
     } = this.state || {};
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+      <div className="Detail">
+        <div className="Detail-header">
+          Ocarina Tabs
         </div>
-        <p className="App-intro">
+        <p className="Detail-intro">
           <textarea type="text" onChange={this.textChange} />
         </p>
         <p>
-
           {
             map(notes, (note, idx) => {
-              return <Note note={note} idx={idx} />
+              return <Note note={note} key={idx} />
             })
           }
         </p>
@@ -42,4 +39,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Detail;

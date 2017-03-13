@@ -1,0 +1,12 @@
+.MainLayout-header {
+  background-color: #222;
+  height: 20px;
+  padding: 15px;
+  color: white;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
