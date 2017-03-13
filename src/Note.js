@@ -71,9 +71,6 @@ class Note extends Component {
 
     // Can't get dynamic require to work
     // imgLoc = require('./images/f12hole/' + fileName + '.png');
-    console.log(notes)
-    console.log(notes.f12hole[fileName])
-    console.log('fileName', fileName)
     return (
       <img key={idx} src={notes.f12hole[fileName]} alt={note} />
     );
