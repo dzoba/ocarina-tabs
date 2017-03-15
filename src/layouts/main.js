@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { map } from 'lodash';
+import { Link } from 'react-router';
 import './main.css';
 
 class MainLayout extends Component {
@@ -7,11 +7,12 @@ class MainLayout extends Component {
     return (
       <div className="MainLayout">
         <div className="MainLayout-header">
-          Ocarina Tabs
+          <Link to={'/'}>Ocarina Tabs</Link>
+          <Link to={'/tabs/asdf1234'}> Detail View</Link>
         </div>
-        <p>
+        <div>
           {this.props.children}
-        </p>
+        </div>
       </div>
     );
   }

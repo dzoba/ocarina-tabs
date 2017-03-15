@@ -15,4 +15,14 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+src/config.js
+src/**/*.css
 
+#src/config.js comes from the firebase console
+#var config = {
+#  apiKey: "",
+#  authDomain: "",
+#  databaseURL: "",
+#  storageBucket: "",
+#  messagingSenderId: ""
+#};
