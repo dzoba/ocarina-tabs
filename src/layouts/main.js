@@ -8,7 +8,7 @@ class MainLayout extends Component {
       <div className="MainLayout">
         <div className="MainLayout-header">
           <Link to={'/'}>Ocarina Tabs</Link>
-          <Link to={'/tabs/asdf1234'}> Detail View</Link>
+          <Link to={'/tabs/new'} style={{float: 'right'}}> Create New</Link>
         </div>
         <div>
           {this.props.children}

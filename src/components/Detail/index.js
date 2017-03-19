@@ -1,59 +1,57 @@
 import React, { Component } from 'react';
-import { map, get } from 'lodash';
+import { map } from 'lodash';
 import './Detail.css';
 import Note from '../Note';
 
+
 class Detail extends Component {
   componentWillMount() {
-    this.state = {};
-    window.firebase.database().ref(`/tabs/${this.props.params.tabId}`).once('value').then((snapshot) => {
-      const tab = snapshot.val();
+    this.state = {
+      db: window.firebase.database()
+    };
+    this.state.db.ref(`/tabs/${this.props.params.tabId}`).once('value').then((snapshot) => {
+      const tab = snapshot.val() || {};
       this.setState({
         tab
       })
-      this.textChange(tab.body)
+      this.updateState('body', tab.body)
     });
-  }
-
-  textChange = (value) => {
-    this.setState({
-      notes: value.trim().split(' ')
-    })
   }
 
   updateState = (param, value) => {
     this.setState({
-      [param]: value
+      tab: Object.assign(this.state.tab, {[param]: value})
     })
   }
 
+  submit = () => {
+    let key = this.props.params.tabId;
+    if (key === 'new') {
+      key = this.state.db.ref('/tabs/').push().key;
+    }
+
+    this.state.db.ref(`/tabs/${key}`).update(this.state.tab);
+  }
+
   render() {
-    const {
-      notes
-    } = this.state || {};
-    const tab = get(this.state, 'tab', {})
+    const tab = this.state.tab || {title: '', body: ''};
 
     return (
       <div className="Detail">
         <div className="Detail-header">
-          {tab.title}
+          <input type="text" value={tab.title} onChange={(e) => { this.updateState('title', e.target.value) }} />
         </div>
         <p className="Detail-intro">
-          {
-            tab.body
-            ? <textarea type="text" defaultValue={tab.body} onChange={(e) => { this.textChange(e.target.value) }} />
-            : null
-          }
-
+          <textarea value={tab.body} onChange={(e) => { this.updateState('body', e.target.value) }} />
         </p>
         <p>
           {
-            map(notes, (note, idx) => {
+            map(tab.body && tab.body.trim().split(' '), (note, idx) => {
               return <Note note={note} key={idx} />
             })
           }
         </p>
-
+        <button onClick={this.submit}>Write To DB</button>
       </div>
     );
   }
