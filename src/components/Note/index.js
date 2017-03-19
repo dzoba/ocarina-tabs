@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Note.css'
 
 import a4 from '../../images/f12hole/a4.png';
 import a4flat from '../../images/f12hole/a4flat.png';
@@ -72,7 +73,7 @@ class Note extends Component {
     // Can't get dynamic require to work
     // imgLoc = require('../../images/f12hole/' + fileName + '.png');
     return (
-      <img key={idx} src={notes.f12hole[fileName]} alt={note} />
+      <img key={idx} className="note-image" src={notes.f12hole[fileName]} alt={note} />
     );
   }
 }

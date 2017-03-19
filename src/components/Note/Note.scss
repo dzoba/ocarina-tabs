@@ -1,0 +1,7 @@
+$break-small: 640px;
+
+.note-image {
+  @media screen and (max-width: $break-small) {
+    zoom: 50%;
+  }
+}
