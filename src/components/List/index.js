@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { map } from 'lodash';
+import { map, orderBy } from 'lodash';
 import ListItem from '../ListItem';
 import './List.css';
 import valsWithKeys from '../../utils';
@@ -16,9 +16,8 @@ class List extends Component {
   render() {
     return (
       <div className="List">
-        List view
         {
-          map(this.state.tabs, tab => {
+          map(orderBy(this.state.tabs, 'title'), tab => {
             return <ListItem tab={tab} key={tab.key} />
           })
         }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router';
 import './ListItem.css';
+import { Card, CardHeader } from 'material-ui/Card';
 
 class ListItem extends Component {
   render() {
@@ -11,9 +12,12 @@ class ListItem extends Component {
     } = this.props.tab;
     return (
       <Link to={`/tabs/${key}`}>
-        <div className="ListItem">
-          {title} - {author}
-        </div>
+        <Card className="list-link">
+          <CardHeader
+            title={title}
+            subtitle={author}
+          />
+        </Card>
       </Link>
     );
   }
