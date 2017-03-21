@@ -1,13 +1,3 @@
-.MainLayout-header {
-  background-color: #222;
-  height: 20px;
-  padding: 15px;
-  color: white;
-  margin-bottom: 10px; }
-  .MainLayout-header a {
-    color: white;
-    text-decoration: none; }
-
 body {
   margin: 0;
   padding: 0;
