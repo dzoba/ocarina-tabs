@@ -5,17 +5,28 @@ import Note from '../Note';
 
 
 class Detail extends Component {
-  componentWillMount() {
+  componentWillMount = () => {
+    this.init();
+  }
+
+  init = (nextProps) => {
+    const props = nextProps || this.props;
     this.state = {
       db: window.firebase.database()
     };
-    this.state.db.ref(`/tabs/${this.props.params.tabId}`).once('value').then((snapshot) => {
+    this.state.db.ref(`/tabs/${props.params.tabId}`).once('value').then((snapshot) => {
       const tab = snapshot.val() || {};
       this.setState({
         tab
       })
       this.updateState('body', tab.body)
     });
+  }
+
+  componentWillReceiveProps = (nextProps) => {
+    if (this.props.params.tabId !== nextProps.params.tabId) {
+      this.init(nextProps);
+    }
   }
 
   updateState = (param, value) => {
@@ -37,7 +48,7 @@ class Detail extends Component {
     const tab = this.state.tab || {title: '', body: ''};
 
     return (
-      <div className="Detail">
+      <div className="Detail" key={this.props.params.tabId}>
         <div className="Detail-header">
           <input type="text" value={tab.title} onChange={(e) => { this.updateState('title', e.target.value) }} />
         </div>
