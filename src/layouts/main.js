@@ -44,6 +44,11 @@ class MainLayout extends Component {
               containerElement={<Link to="/tabs/new" />}
               onTouchTap={this.closeLeftNav}
             />
+            <MenuItem
+              primaryText="Sign in / Sign Up"
+              containerElement={<Link to="/auth" />}
+              onTouchTap={this.closeLeftNav}
+            />
           </Drawer>
         </AppBar>
         <div>
