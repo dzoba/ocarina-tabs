@@ -16,7 +16,6 @@ class Auth extends Component {
   render() {
     return (
       <div className="Auth">
-        This is Auth
         <div id="firebaseui-auth"></div>
       </div>
     );
