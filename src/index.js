@@ -13,8 +13,8 @@ import Detail from './components/Detail';
 import MainLayout from './layouts/main';
 
 injectTapEventPlugin();
-
-window.firebase = firebase.initializeApp(config);
+firebase.initializeApp(config);
+window.firebase = firebase;
 window.firebaseui = firebaseui;
 
 ReactDOM.render(
