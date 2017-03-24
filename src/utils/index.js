@@ -23,7 +23,6 @@ const notesConvertToTransposer = notes => {
 }
 
 const notesConvertFromTransposer = notes => {
-  console.log('fromnotes', notes)
   return notes.map((note) => {
     if (note.indexOf('#') > -1 || note.indexOf('b') > -1) {
       return '' + note.substr(0, 1) + note.substr(2, 1) + symbolMap[note.substr(1, 1)];
