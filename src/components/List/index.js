@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { map, orderBy } from 'lodash';
 import ListItem from '../ListItem';
 import './List.css';
-import valsWithKeys from '../../utils';
+import { valsWithKeys } from '../../utils';
 
 class List extends Component {
   componentWillMount() {

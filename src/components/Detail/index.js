@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { map } from 'lodash';
 import './Detail.css';
 import Note from '../Note';
-
+import transposer from 'note-transposer';
+import { notesConvertToTransposer, notesConvertFromTransposer } from '../../utils/';
 
 class Detail extends Component {
   componentWillMount = () => {
@@ -35,6 +36,27 @@ class Detail extends Component {
     })
   }
 
+  transposeUp = () => {
+    const transposerNotes = notesConvertToTransposer(this.state.tab.body);
+    const transposedNotes = transposerNotes.map(transposer('2M'));
+    const ourNewNotes =  notesConvertFromTransposer(transposedNotes);
+
+    this.setState({
+      tab: Object.assign(this.state.tab, {body:ourNewNotes})
+    })
+
+  }
+
+  transposeDown = () => {
+    const transposerNotes = notesConvertToTransposer(this.state.tab.body);
+    const transposedNotes = transposerNotes.map(transposer('-2M'));
+    const ourNewNotes =  notesConvertFromTransposer(transposedNotes);
+
+    this.setState({
+      tab: Object.assign(this.state.tab, {body:ourNewNotes})
+    })
+  }
+
   submit = () => {
     let key = this.props.params.tabId;
     if (key === 'new') {
@@ -46,23 +68,24 @@ class Detail extends Component {
 
   render() {
     const tab = this.state.tab || {title: '', body: ''};
-
     return (
       <div className="Detail" key={this.props.params.tabId}>
         <div className="Detail-header">
           <input type="text" value={tab.title} onChange={(e) => { this.updateState('title', e.target.value) }} />
         </div>
-        <p className="Detail-intro">
+        <div className="Detail-intro">
           <textarea value={tab.body} onChange={(e) => { this.updateState('body', e.target.value) }} />
-        </p>
-        <p>
+        </div>
+        <div>
           {
             map(tab.body && tab.body.trim().split(' '), (note, idx) => {
               return <Note note={note} key={idx} />
             })
           }
-        </p>
+        </div>
         <button onClick={this.submit}>Write To DB</button>
+        <button onClick={this.transposeUp}>Transpose Up</button>
+        <button onClick={this.transposeDown}>Transpose Down</button>
       </div>
     );
   }
