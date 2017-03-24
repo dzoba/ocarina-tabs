@@ -2,6 +2,7 @@ $break-small: 640px;
 
 .note-image {
   display: inline-block;
+  zoom: 70%;
   @media screen and (max-width: $break-small) {
     zoom: 50%;
   }
